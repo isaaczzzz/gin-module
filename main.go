@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/gin-gonic/gin"
 	"github.com/isaaczzzz/gin-module/api"
+	"github.com/isaaczzzz/gin-module/internal/service"
 	"github.com/isaaczzzz/gin-module/pkg/config"
 	"github.com/isaaczzzz/gin-module/pkg/rpcclient"
 	"log"
@@ -26,8 +27,11 @@ func main() {
 		}
 	}(rpcClients)
 
+	// 创建 Service 实例
+	services := service.InitServices(rpcClients)
+
 	// 创建 Controller 实例
-	controllers := api.InitControllers(rpcClients)
+	controllers := api.InitControllers(services)
 
 	// 创建 Gin 引擎
 	r := gin.Default()

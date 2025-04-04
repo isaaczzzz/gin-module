@@ -3,16 +3,16 @@ package api
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/isaaczzzz/gin-module/api/echo"
-	"github.com/isaaczzzz/gin-module/pkg/rpcclient"
+	"github.com/isaaczzzz/gin-module/internal/service"
 )
 
 type Controllers struct {
 	EchoController *echo.EchoController
 }
 
-func InitControllers(rpcClients *rpcclient.RPCClients) *Controllers {
+func InitControllers(services *service.Services) *Controllers {
 	return &Controllers{
-		EchoController: echo.NewEchoController(rpcClients.EchoClient),
+		EchoController: echo.NewEchoController(services.EchoService),
 	}
 }
 
